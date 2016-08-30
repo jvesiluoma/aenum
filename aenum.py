@@ -6,7 +6,7 @@
 # Autoenumerator is a quick script that combines some
 # other (great) tools to collect data from given domain.
 #
-# Made by Jarkko Vesiluoma - 2016
+# Jarkko Vesiluoma - 2016
 #
 
 
