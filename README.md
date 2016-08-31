@@ -3,9 +3,11 @@
 ![alt tag](http://www.vesiluoma.com/aenum/aenum.jpg)
 
 <H2>What?</H2><br><br>
-  Simple 'automatic enumerator' that uses few other tools.<br>
-	Automatic domain enumerator and scraper to get screenshots from sites.<br>
-	Just a simple script to combine few other scripts.<br>
+  Small 'automatic enumerator' that...<br>
+  	* Scans given domain for subdomains.<br>
+  	* Scans for CNAMEs (for possible subdomain takeovers).<br>
+  	* Scans ports from targets.<br>
+  	* Tries to grab screenshot from websites / ports that are found.<br>
 <br>
 <br>
 <H2>Usage:</H2><br><br>
