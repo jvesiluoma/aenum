@@ -22,7 +22,7 @@
 <br>
 <H2>Installation</H2>
 	* git clone https://github.com/jvesiluoma/aenum
-	+ requirements (see above :))
+		+ requirements (see above :))
 
 Version 1.0
 	* Requirements check added.
