@@ -19,3 +19,10 @@
 	* Knockpy (https://github.com/guelfoweb/knock)<br>
 	* Python (https://www.python.org/)<br>
         * Sublist3r (https://github.com/aboul3la/Sublist3r)<br>
+<br>
+<H2>Installation</H2>
+	* git clone https://github.com/jvesiluoma/aenum
+	+ requirements (see above :))
+
+Version 1.0
+	* Requirements check added.
