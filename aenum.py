@@ -6,7 +6,10 @@
 # Autoenumerator is a quick script that combines some
 # other (great) tools to collect data from given domain.
 #
-# Jarkko Vesiluoma - 2016
+# Made by Jarkko Vesiluoma - 2016
+#
+# Updated 02.09.2016 16:30 - v.1.00
+# 	- Requirements check added
 #
 
 
@@ -21,6 +24,8 @@ sublist3rloc = currdir + "Sublist3r-master/sublist3r.py"
 sublist3rtmpfile = "aenum_sublist3rtmp"
 sublist3rdefargs = " -t 10" 
 masscandefargs = " --rate 10000 "
+masscanloc = "/usr/bin/masscan"
+knockpyloc = "/usr/local/bin/knockpy"
 ipoutfile = "aenum_networks_"
 httpscreenshotloc = currdir + "httpscreenshots/httpscreenshot.py"
 pythoncmd = "/usr/bin/python2.7"
@@ -35,6 +40,43 @@ B = '\033[94m' #blue
 R = '\033[91m' #red
 W = '\033[0m'  #white
 
+
+def check_requirements():
+
+    print G + "[*] Checking requirements..." + W 
+
+    AllOk = True
+
+    # sublist3r
+    if os.path.isfile(sublist3rloc):
+        print G + "    [*] sublist3r found!" + W
+    else:
+        print R + "    [ ] sublist3r not found!" + W
+        AllOk = False
+
+    # masscan
+    if os.path.isfile(masscanloc):
+        print G + "    [*] masscan found!" + W
+    else:
+        print R + "    [ ] masscan not found!" + W
+        AllOk = False
+
+    # knockpy
+    if os.path.isfile(knockpyloc):
+        print G + "    [*] knockpy found!" + W
+    else:
+        print R + "    [ ] knockpy not found!" + W
+        AllOk = False
+
+    # httpscreenshot
+    if os.path.isfile(httpscreenshotloc):
+        print G + "    [*] httpscreenshot found!" + W
+        print "\n"
+    else:
+        print R + "    [ ] httpscreenshot not found!" + W
+        AllOk = False
+
+    return AllOk
 
 def parse_args():
     # Parse args
@@ -79,7 +121,7 @@ def banner(id):
 
 def enum_sublist3r(domain,sublist3rtmpfile,subargs,outputpath):
     # 1. Enumerate DNS names from given domain
-    print G+"[*] Running domain enumeration agains " + domain
+    print G+"[*] Running domain enumeration against " + domain
     subargs = " -d " + domain + subargs + " -o " + sublist3rtmpfile + "_" + domain + ".lst"
     sublist3rcmd = pythoncmd + " " + sublist3rloc + subargs
     try:
@@ -89,7 +131,7 @@ def enum_sublist3r(domain,sublist3rtmpfile,subargs,outputpath):
         print R + "[ ] Error running sublist3r, is it installed and configured? Try running it manually to check." + W
         print R + "sublist3rcmd"
         exit(1)
-
+    print G+"[*] sublist3r done!"+W
 
 def enum_knockpy(outputpath,sublist3rtmpfile,domain):
     infile = sublist3rtmpfile + "_" + domain + ".lst"
@@ -181,6 +223,12 @@ def enum_httpscreenshots(httpscreenshotloc,masscanoutfile,screenshotopt,outputpa
         print R + "    with parameters: " + R + httpscreenshotcmd + W
         exit(1)
 def main():
+
+    # Check requirements!
+    reqsok = check_requirements()
+    if not reqsok:
+        print R + "[ ] Requirements not met, check requirements!" + W
+        exit(1)
 
     args = parse_args()
     domain = args.domain
